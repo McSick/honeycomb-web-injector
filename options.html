@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenTelemetry Injector Options</title>
+</head>
+<body>
+  <h1>OpenTelemetry Injector Options</h1>
+  <form id="options-form">
+    <label for="pattern">URL Pattern:</label>
+    <input type="text" id="pattern" name="pattern" required><br><br>
+    <label for="apiKey">API Key:</label>
+    <input type="text" id="apiKey" name="apiKey" required><br><br>
+    <label for="serviceName">Service Name:</label>
+    <input type="text" id="serviceName" name="serviceName" required><br><br>
+    <label for="enabled">Enable Injection:</label>
+    <input type="checkbox" id="enabled" name="enabled"><br><br>
+    <input type="submit" value="Save">
+  </form>
+  <script src="options.js"></script>
+</body>
+</html>
