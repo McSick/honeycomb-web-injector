@@ -1,13 +1,10 @@
-Sure! Here’s a `README.md` file that explains how to set up and use the extension:
-
-```markdown
 # OpenTelemetry Injector Chrome Extension
 
-This Chrome extension injects the OpenTelemetry web SDK into specified pages based on a user-defined pattern. It includes options to enable or disable the injection and to configure the necessary API key and service name.
+This Chrome extension injects the Honeycomb OpenTelemetry web SDK into specified pages based on a user-defined pattern. It includes options to enable or disable the injection and to configure the necessary API key and service name.
 
 ## Features
 
-- Injects OpenTelemetry SDK into pages that match a user-defined pattern
+- Injects Honeycomb OpenTelemetry SDK into pages that match a user-defined pattern
 - Allows users to configure API key and service name for the SDK
 - Toggle to enable or disable the injection
 
@@ -23,8 +20,8 @@ This Chrome extension injects the OpenTelemetry web SDK into specified pages bas
 1. **Clone the Repository**
 
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   git clone https://github.com/McSick/honeycomb-web-injector.git
+   cd honeycomb-web-injector
    ```
 
 2. **Install Dependencies**
@@ -55,7 +52,7 @@ This Chrome extension injects the OpenTelemetry web SDK into specified pages bas
 2. **Configure the Extension**
 
    - **URL Pattern**: Enter the URL pattern to match the pages where the SDK should be injected.
-   - **API Key**: Enter your OpenTelemetry API key.
+   - **API Key**: Enter your Honeycomb Ingest API key.
    - **Service Name**: Enter the name of your service.
    - **Enable Injection**: Toggle to enable or disable the script injection.
 
@@ -96,9 +93,3 @@ This Chrome extension injects the OpenTelemetry web SDK into specified pages bas
 
 If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
 
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-```
-
-This `README.md` file should provide clear instructions on how to set up, configure, and use the extension, as well as some guidance on development and contributing. Let me know if you need any further adjustments or additions!
