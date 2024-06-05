@@ -23,25 +23,33 @@ This Chrome extension injects the Honeycomb OpenTelemetry web SDK into specified
    git clone https://github.com/McSick/honeycomb-web-injector.git
    cd honeycomb-web-injector
    ```
+2. **Load the Extension into Chrome**
 
-2. **Install Dependencies**
+   1. Open Chrome and navigate to `chrome://extensions/`
+   2. Enable "Developer mode" using the toggle switch in the top right corner
+   3. Click "Load unpacked" and select the directory of your extension
+
+### Building if making changes 
+
+1. **Install Dependencies**
 
    ```bash
    npm install --save @honeycombio/opentelemetry-web @opentelemetry/auto-instrumentations-web
    npm install --save-dev webpack webpack-cli babel-loader @babel/core @babel/preset-env
    ```
 
-3. **Build the Project**
+2. **Build the Project**
 
    ```bash
    npx webpack
    ```
-
-4. **Load the Extension into Chrome**
+   
+3. **Load the Extension into Chrome**
 
    1. Open Chrome and navigate to `chrome://extensions/`
    2. Enable "Developer mode" using the toggle switch in the top right corner
    3. Click "Load unpacked" and select the directory of your extension
+
 
 ## Usage
 
