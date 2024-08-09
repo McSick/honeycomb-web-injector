@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@honeycombio/opentelemetry-web": "^0.5.0",
+    "@honeycombio/opentelemetry-web": "^0.6.0",
     "@opentelemetry/auto-instrumentations-web": "^0.40.0"
   },
   "devDependencies": {
