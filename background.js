@@ -1,16 +1,40 @@
 let globalCounts = { spanCount: 0, spanEventCount: 0 };
+// Assuming you have these icon files in your extension directory
+const activeIcons = {
+  16: 'icon-active.png',
+  32: 'icon-active.png',
+  48: 'icon-active.png',
+  128: 'icon-active.png'
+};
+
+const inactiveIcons = {
+  16: 'icon.png',
+  32: 'icon.png',
+  48: 'icon.png',
+  128: 'icon.png'
+};
+
+function updateIcon(tabId, isActive) {
+  const icons = isActive ? activeIcons : inactiveIcons;
+  chrome.action.setIcon({
+    tabId: tabId,
+    path: icons
+  });
+}
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete') {
     chrome.storage.sync.get(['pattern', 'apiKey', 'serviceName', 'enabled'], ({ pattern, apiKey, serviceName, enabled }) => {
       console.log('Retrieved settings from storage:', { pattern, apiKey, serviceName, enabled });
       if (!enabled) {
+        updateIcon(tabId, false);
         console.log('Injection is disabled');
         return;
       }
       const regex = new RegExp(pattern);
       if (regex.test(tab.url)) {
         console.log('URL matches pattern:', tab.url);
+        updateIcon(tabId, true);
         chrome.scripting.executeScript({
           target: { tabId: tabId },
           files: ['content.js']
@@ -24,6 +48,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
           });
         });
       } else {
+        updateIcon(tabId, true);
         console.log('URL does not match pattern:', tab.url);
       }
     });
@@ -58,4 +83,19 @@ chrome.storage.local.get(['spanCount', 'spanEventCount'], (items) => {
     spanCount: items.spanCount || 0,
     spanEventCount: items.spanEventCount || 0
   };
+});
+
+// Listen for changes in storage to update icon if settings change
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  if (namespace === 'sync' && (changes.pattern || changes.enabled)) {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+      if (tabs[0]) {
+        chrome.storage.sync.get(['pattern', 'enabled'], ({ pattern, enabled }) => {
+          const regex = new RegExp(pattern);
+          const isActive = enabled && regex.test(tabs[0].url);
+          updateIcon(tabs[0].id, isActive);
+        });
+      }
+    });
+  }
 });
