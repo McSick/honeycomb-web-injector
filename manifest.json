@@ -1,38 +1,57 @@
 {
-    "manifest_version": 3,
-    "name": "OpenTelemetry Injector",
-    "version": "1.2",
-    "content_security_policy": {
-        "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
-      },
-    "description": "Injects the OpenTelemetry web SDK into specified pages.",
-    "permissions": [
-      "activeTab",
-      "storage",
-      "scripting"
-    ],
-    "host_permissions": [
-      "<all_urls>"
-    ],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "options_page": "options.html",
-    "action": {
-      "default_popup": "options.html"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"],
-        "run_at": "document_start"
-      }
-    ],
-    "web_accessible_resources": [
-      {
-        "resources": ["dist/tracing.bundle.js"],
-        "matches": ["<all_urls>"]
-      }
-    ]
-  }
-  
+  "manifest_version": 3,
+  "name": "OpenTelemetry Injector",
+  "version": "1.3",
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+  },
+  "description": "Injects the OpenTelemetry web SDK into specified pages.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_popup": "options.html",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "dist/tracing.bundle.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
