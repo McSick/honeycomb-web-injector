@@ -67,6 +67,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
     });
     chrome.storage.local.set(globalCounts);
+    chrome.runtime.sendMessage({ 
+      type: 'UPDATE_SPAN_COUNT', 
+      spans: 0, 
+      events: 0
+  });
   } else if (message.type === 'UPDATE_SPAN_COUNT') {
     globalCounts = {
       spanCount: message.spans,

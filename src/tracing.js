@@ -45,6 +45,12 @@ window.addEventListener('message', (event) => {
     case 'START_NEW_SESSION':
       if (spanCounterProcessor) {
         spanCounterProcessor.resetCount();
+      } else {
+        window.postMessage({ 
+          type: 'UPDATE_SPAN_COUNT', 
+          spans: 0, 
+          events: 0
+      }, '*');
       }
       break;
   }
