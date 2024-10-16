@@ -24,17 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('enabled').checked = items.enabled;
     }
   });
-});
 
+    // Fetch current span counts
+    chrome.runtime.sendMessage({type: 'GET_CURRENT_SPAN_COUNTS'}, (response) => {
+      if (response) {
+        updateSpanCounts(response.spans, response.events);
+      }
+    });
+});
+function updateSpanCounts(spans, events) {
+  document.getElementById('span-count-display').textContent = `Spans: ${spans}`;
+  document.getElementById('span-event-count-display').textContent = `Span Events: ${events}`;
+  const engagements = Math.ceil((spans + events) / 100);
+  document.getElementById('engagements-display').textContent = `Engagements: ${engagements}`;
+}
 document.getElementById('start-new-session').addEventListener('click', () => {
   chrome.runtime.sendMessage({ type: 'START_NEW_SESSION' });
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'UPDATE_SPAN_COUNT') {
-    document.getElementById('span-count-display').textContent = `Spans: ${message.spans}`;
-    document.getElementById('span-event-count-display').textContent = `Span Events: ${message.events}`;
-    const engagements = Math.ceil((message.spans + message.events) / 100);
-    document.getElementById('engagements-display').textContent = `Engagements: ${engagements}`;
+    updateSpanCounts(message.spans, message.events);
+
   }
 });

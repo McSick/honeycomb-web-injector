@@ -27,6 +27,7 @@ function startTracing(apiKey, serviceName, initialCounts) {
     spanProcessors: [spanCounterProcessor],
   });
   sdk.start();
+  spanCounterProcessor.updateCounts();
   console.log('Tracing started');
 }
 

@@ -74,6 +74,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     };
     chrome.storage.local.set(globalCounts);
     chrome.runtime.sendMessage(message);
+  } else if (message.type === 'GET_CURRENT_SPAN_COUNTS') {
+    sendResponse({
+      spans: globalCounts.spanCount,
+      events: globalCounts.spanEventCount
+    });
   }
 });
 
@@ -83,6 +88,8 @@ chrome.storage.local.get(['spanCount', 'spanEventCount'], (items) => {
     spanCount: items.spanCount || 0,
     spanEventCount: items.spanEventCount || 0
   };
+  console.log('Loaded initial counts from storage:', globalCounts);
+  chrome.runtime.sendMessage({ type: 'UPDATE_SPAN_COUNT', spans: globalCounts.spanCount, events: globalCounts.spanEventCount });
 });
 
 // Listen for changes in storage to update icon if settings change

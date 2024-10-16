@@ -22,8 +22,7 @@ class SpanCounterProcessor {
     onEnd(span) {
         this.spanCount++;
         this.spanEventCount += span.events.length;
-
-        console.log(`Processed a span. Total count: ${this.spanCount}, Event count: ${this.spanEventCount}`);
+        //console.log(`Processed a span. Total count: ${this.spanCount}, Event count: ${this.spanEventCount}`);
         this.updateCounts();
     }
 
